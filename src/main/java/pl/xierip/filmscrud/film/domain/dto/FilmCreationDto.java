@@ -1,10 +1,14 @@
 package pl.xierip.filmscrud.film.domain.dto;
 
-import org.bson.types.ObjectId;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class FilmCreationDto {
 
-  private ObjectId id;
-  private String   name;
-  private String   description;
+  private String        name;
+  private String        description;
 }
