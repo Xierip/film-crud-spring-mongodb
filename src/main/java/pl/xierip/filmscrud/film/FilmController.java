@@ -26,6 +26,10 @@ class FilmController {
 
   private FilmFacade filmFacade;
 
+  public FilmController(FilmFacade filmFacade) {
+    this.filmFacade = filmFacade;
+  }
+
   @PostMapping
   ResponseEntity<FilmDto> createFilm(FilmCreationDto filmCreationDto) {
     return ResponseEntity.ok(filmFacade.add(filmCreationDto));
@@ -42,12 +46,13 @@ class FilmController {
   }
 
   @PutMapping("{id}")
-  ResponseEntity<Page<FilmDto>> updateFilmData(@RequestBody @Valid @NotNull FilmDataUpdateDto filmDataUpdateDto) {
-    return ResponseEntity.ok(filmFacade.update(filmDataUpdateDto));
+  ResponseEntity<FilmDto> updateFilmData(@PathVariable @Valid @NotNull ObjectId id,
+      @RequestBody @Valid @NotNull FilmDataUpdateDto filmDataUpdateDto) {
+    return ResponseEntity.ok(filmFacade.update(id, filmDataUpdateDto));
   }
 
   @DeleteMapping("{id}")
-  ResponseEntity< Page<FilmDto>> deleteFilm(@PathVariable ObjectId id) {
+  ResponseEntity<FilmDto> deleteFilm(@PathVariable ObjectId id) {
     return ResponseEntity.ok(filmFacade.remove(id));
   }
 

@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 import pl.xierip.filmscrud.infrastructure.constant.MongoCollections
 import spock.lang.Specification
@@ -26,7 +27,8 @@ abstract class IntegrationSpec extends Specification {
   MockMvc mockMvc
 
   void setup() {
-
+    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+        .build()
   }
 
   void cleanup() {

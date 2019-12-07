@@ -1,13 +1,23 @@
 package pl.xierip.filmscrud.film
 
+import org.springframework.test.web.servlet.ResultActions
 import pl.xierip.filmscrud.base.IntegrationSpec
+import pl.xierip.filmscrud.film.domain.dto.FilmCreationDto
+import pl.xierip.filmscrud.infrastructure.constant.ApiLayers
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 class FilmControllerSpec extends IntegrationSpec {
 
   def "create new film"() {
     given: "I have new film to add"
+      FilmCreationDto filmCreationDto = new FilmCreationDto("Test name", "Test desc")
     when: "I post to endpoint"
+      ResultActions request = mockMvc.perform(post(ApiLayers.FILMS, filmCreationDto))
     then: "Request return http code created"
+      request.andExpect(status().isOk())
+
   }
 
   def "show film"() {

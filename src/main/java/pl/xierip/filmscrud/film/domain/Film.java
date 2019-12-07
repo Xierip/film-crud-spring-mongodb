@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import pl.xierip.filmscrud.film.domain.dto.FilmDto;
 import pl.xierip.filmscrud.infrastructure.constant.MongoCollections;
 
 @Document(MongoCollections.FILMS)
@@ -19,4 +20,11 @@ class Film {
   private String   name;
   private String   description;
 
+  public FilmDto dto() {
+    return FilmDto.builder()
+        .id(id)
+        .name(name)
+        .description(description)
+        .build();
+  }
 }
